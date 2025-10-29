@@ -5,7 +5,11 @@ const DYNAMIC_CACHE_NAME = 'dynamic-v2';
 const APP_SHELL_FILES = [
   '/',
   '/index.html',
-  '/manifest.json'
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/boton-flotante.png',
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap'
 ];
 
 // 1. Durante la fase de instalación, guardamos el App Shell en caché
@@ -34,8 +38,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const { request } = event;
 
-  // Estrategia para las llamadas a la API (/api/...)
-  if (request.url.includes('/api/')) {
+  // Estrategia para las llamadas a la API externa (open.er-api.com)
+  if (request.url.includes('https://open.er-api.com/v6/latest/USD')) {
     event.respondWith(
       // Primero intenta ir a la red
       fetch(request).then(networkResponse => {
